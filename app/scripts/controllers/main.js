@@ -15,7 +15,7 @@ angular.module('tareasApp')
     $scope.$watch('tareas', function(){
         localStorageService.add('tareas', $scope.tareas.join('\n'));
     },true);
-   // $scope.tareas = [];
+   // $scope.tareas = [''];
     $scope.addTarea = function(){
     	$scope.tareas.push($scope._tarea);
     	$scope._tarea='';
