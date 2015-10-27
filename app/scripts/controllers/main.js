@@ -8,8 +8,14 @@
  * Controller of the tareasApp
  */
 angular.module('tareasApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.tareas = ['Item 1','Item 2','Item 3','Item 123'];
+  .controller('MainCtrl', function ($scope, localStorageService) {
+   
+    var tareasEnAlmacen = localStorageService.get('tareas');
+    $scope.tareas = tareasEnAlmacen && tareasEnAlmacen.split('\n') || [] ;
+    $scope.$watch('tareas', function(){
+        localStorageService.add('tareas', $scope.tareas.join('\n'));
+    },true);
+   // $scope.tareas = [];
     $scope.addTarea = function(){
     	$scope.tareas.push($scope._tarea);
     	$scope._tarea='';
